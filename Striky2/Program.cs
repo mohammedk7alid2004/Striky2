@@ -1,5 +1,6 @@
 using Striky.Api.Repository;
 using Striky.Api.Services;
+using Striky2.Services.ExerciesServcies;
 
 var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
@@ -15,6 +16,7 @@ builder.Services.AddDbContext<Db16821Context>(options => options.UseSqlServer
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped<ICategoryServices,CategoryServices>();
  builder.Services.AddScoped<CategoryServices>();
+builder.Services.AddScoped<IExerciesServices,ExerciesServices>();
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowAll", policy =>
