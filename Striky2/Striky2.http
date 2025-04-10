@@ -1,0 +1,6 @@
+@Striky2_HostAddress = http://localhost:5003
+
+GET {{Striky2_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
