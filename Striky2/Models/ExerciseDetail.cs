@@ -11,7 +11,7 @@ public partial class ExerciseDetail
     public int ExerciseDetailId { get; set; }   
     public string? Name { get; set; }
 
-    public string? Photo { get; set; }
+    public string? Photo { get; set; } = string.Empty;
 
     public string? Description { get; set; }
 

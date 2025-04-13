@@ -1,5 +1,7 @@
 using Striky.Api.Repository;
 using Striky.Api.Services;
+using Striky2.Models;
+using Striky2.Services.ExerciesDetailsServcies;
 using Striky2.Services.ExerciesServcies;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -17,6 +19,9 @@ builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped<ICategoryServices,CategoryServices>();
  builder.Services.AddScoped<CategoryServices>();
 builder.Services.AddScoped<IExerciesServices,ExerciesServices>();
+builder.Services.Configure<AppSettings>(builder.Configuration.GetSection("UploadPaths"));
+builder.Services.AddTransient<IExerciesDetailsServcies, ExerciesDetailsServcies>();
+
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowAll", policy =>
