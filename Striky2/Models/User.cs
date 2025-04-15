@@ -1,17 +1,14 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Identity;
+using System;
 using System.Collections.Generic;
 
 namespace Striky.Api.Models;
 
-public partial class User
+public partial class User:IdentityUser
 {
-    public int UserId { get; set; }
 
-    public string? Name { get; set; }
 
-    public string? Email { get; set; }
-
-    public string? Password { get; set; }
+   public string Photo { get; set; } = string.Empty;
 
     public int? Age { get; set; }
 
@@ -25,7 +22,7 @@ public partial class User
 
     public string? Goal { get; set; }
 
-    public DateTime? CreatedAt { get; set; }
+    public DateTime? CreatedAt { get; set; }=DateTime.Now;
 
     public virtual ICollection<Notification> Notifications { get; set; } = new List<Notification>();
 }
