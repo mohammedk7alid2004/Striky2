@@ -8,6 +8,9 @@ namespace Striky2.Services.Users
     {
         public Task<IEnumerable<UserResponse>> GetAll();
         public  Task<bool>   Create(UserRequest f);
-        public  Task<bool> Login(LoginDto loginDto);
+        public  Task<string> Login(LoginDto loginDto);
+        public Task<bool> Update(int id , UserRequest f);
+        public Task<bool> Delete(int id);
+        public Task<UserResponse> GetById(int id);
     }
 }

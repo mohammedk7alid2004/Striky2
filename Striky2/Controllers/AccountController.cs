@@ -27,15 +27,15 @@ namespace Striky2.Controllers
 
             return Ok("User registered successfully");
         }
-        [HttpPost("Login")]
-        public async Task<IActionResult> Login([FromBody] LoginDto loginDto)
+        [HttpPost("login")]
+        public async Task<IActionResult> Login([FromForm] LoginDto loginDto)
         {
-            var issuccess = await _userServices.Login(loginDto);
-            if (!issuccess)
-            {
-                return BadRequest("Login failed");
-            }
-            return Ok("Login successful");
+            var token = await _userServices.Login(loginDto);
+
+            if (string.IsNullOrEmpty(token))
+                return Unauthorized(new { message = "Invalid email or password" });
+
+            return Ok(new { token });
         }
         [HttpGet("GetAll")]
         public async Task<IActionResult> GetALL()
@@ -43,9 +43,31 @@ namespace Striky2.Controllers
             var users = await _userServices.GetAll();
             return Ok(users);
         }
-        public IActionResult Logoout()
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetById(int id)
         {
-            return Ok();
+            var user = await _userServices.GetById(id);
+            if (user == null)
+                return NotFound();
+            return Ok(user);
         }
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Update(int id, [FromForm] UserRequest userRequest)
+        {
+            var issuccess = await _userServices.Update(id, userRequest);
+            if (!issuccess)
+                return BadRequest("User update failed");
+            return Ok("User updated successfully");
+        }
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var issuccess = await _userServices.Delete(id);
+            if (!issuccess)
+                return BadRequest("User deletion failed");
+            return Ok("User deleted successfully");
+        }
+
     }
+
 }
